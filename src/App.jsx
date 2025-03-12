@@ -22,7 +22,10 @@ const App = () => {
     setCart((OldCart) => {
       const updateCart = { ...OldCart };
       if (updateCart[product.id]) {
-        updateCart[product.id].quantity += 1;
+        updateCart[product.id] = {
+          ...product,
+          quantity: updateCart[product.id].quantity + 1,
+        };
       } else {
         updateCart[product.id] = { ...product, quantity: 1 };
       }
@@ -33,7 +36,10 @@ const App = () => {
     setCart((OldCart) => {
       const updateCart = { ...OldCart };
       if (updateCart[id].quantity > 1) {
-        updateCart[id].quantity -= 1;
+        updateCart[id] = {
+          ...updateCart[id],
+          quantity: updateCart[id].quantity - 1,
+        };
       } else {
         delete updateCart[id];
       }
@@ -44,7 +50,10 @@ const App = () => {
     setCart((OldCart) => {
       const updateCart = { ...OldCart };
 
-      updateCart[id].quantity += 1;
+      updateCart[id] = {
+        ...updateCart[id],
+        quantity: updateCart[id].quantity + 1,
+      };
       return updateCart;
     });
   };
@@ -68,7 +77,13 @@ const App = () => {
           Here are the available products:{" "}
         </h3>
       </header>
-      <div style={{ flex: 1, display: "grid", gridTemplateColumns: "3fr 1fr" }}>
+      <div
+        style={{
+          flex: 1,
+          display: "grid",
+          gridTemplateColumns: "3fr 1fr",
+        }}
+      >
         <div
           style={{
             display: "grid",
@@ -76,7 +91,7 @@ const App = () => {
               "repeat(auto-fit, minmax(min(200px,100%),1fr))",
             // flexWrap: "wrap",
             // justifyContent: "space-evenly",
-            maxHeight: 400,
+            maxHeight: "auto",
             padding: 2,
           }}
         >
@@ -197,7 +212,6 @@ const App = () => {
           color: "lightgray",
           margin: "40px 4px 4px 4px",
           padding: "5px ",
-
           textAlign: "center",
         }}
       >
